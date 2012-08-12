@@ -9,7 +9,7 @@ public class Test {
         int[] a = new int[]{1, 3, 5, 8, 11};
 
         System.out.println(ArraySum.sum(a, a.length));
-        System.out.println(ArrayFindOccurMoreThanHalf.find(new int[]{2, 3, 3, 3, 2, 2, 2, 2}, 8));
+        System.out.println(ArrayFindOccurMoreThanHalf.find(new int[]{2, 3, 3, 3, 2, 2, 2, 2}));
         System.out.println(ArrayFindMinAbs.findMinAbs(new int[]{1, 5, 7, 11, 23, 9, 30}, 7));
 
         ArrayFindCommonElements.findCommon(new int[]{1, 2, 4, 6, 8, 11}, new int[]{2, 3, 6, 8, 9});
