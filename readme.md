@@ -1,0 +1,543 @@
+#Interview Review
+##Overview
+### 数组类
+
+对于数组查找问题，如果数组有序则首先应该想到做二分搜索，时间复杂度为`O(logn)`。如果数组无序，则考虑排序，MergeSort或QuickSort都可以在`O(nlogn)`内完成排序，接着可以考虑二分搜索。
+
+#### 数组求和
+给定一个含有n个元素的整型数组a，求a中所有元素的和。要求使用递归实现。
+
+解法：
+
+    public static int sum(int[] a, int n) {
+        return n == 0 ? 0 : sum(a, n - 1) + a[n - 1];
+    }
+
+#### 求数组中出现次数超过一半的元素
+给定一个n个整型元素的数组a，其中有一个元素出现次数超过n / 2，求这个元素。
+
+解法1：排序，然后找中间的元素。如果该元素出现超过次数超过一半则一定位于排序后的数组中间。
+
+解法2：设置一个当前值和当前值出现次数的计数器，初始化为第一个元素，计数器值为1.然后从第二个元素开始遍历数组。如果第i个元素值等于当前值则计数器加1，不等则计数器减1，如果计数器值小于1则更新当前值并重置计数器值为1.遍历完成后的当前值即为出现超过一半的元素。
+
+    public static int find(int[] a, int n) {
+        int current = a[0];
+        int count = 1;
+        for (int i = 1; i < n; i++) {
+            if (a[i] == current) {
+                count++;
+            } else {
+                count--;
+                if (count < 0) {
+                    current = a[i];
+                    count = 1;
+                }
+            }
+
+        }
+        return current;
+    }
+
+#### 求数组中元素的最短距离
+给定一个含有n个元素的整型数组，找出数组中的两个元素x和y使得abs(x - y)值最小
+
+解法：对数组排序，然后遍历一遍求前后两元素差值即可求出。
+
+    public static int findMinAbs(int[] a, int n) {
+        Arrays.sort(a);
+        int min = Integer.MAX_VALUE;
+        for (int i = 1; i < n; i++) {
+            if (Math.abs(a[i] - a[i - 1]) < min) {
+                min = Math.abs(a[i] - a[i - 1]);
+            }
+        }
+        return min;
+    }
+
+#### 求两个有序数组的共同元素
+给定两个含有n个元素的有序（非降序）整型数组a和b，求出其共同元素，比如
+a = 0, 1, 2, 3, 4
+b = 1, 3, 5, 7, 9
+输出 1, 3
+
+解法1：利用数组有序的性质，设置两个指针i，j分别指向数组a，b的头部。
+判断a[i], b[j]的大小，如果相等则输出共同元素并且共同向后移动。如果a[i]大则指针j向后移动，如果b[j]大则指针i向后移动。
+
+    public static void findCommon(int[] a, int[] b) {
+        for (int i = 0, j = 0; i < a.length && j < b.length; ) {
+            if (a[i] == b[j]) {
+                System.out.println("Found common: " + a[i]);
+                i++;
+                j++;
+            } else if (a[i] > b[j]) {
+                j++;
+            } else {
+                i++;
+            }
+        }
+    }
+
+解法2：可以对数组a中每一个元素在数组b中做二分搜索（binary search），这样的话只需要数组b有序即可。
+
+#### 求三个数组的共同元素
+给定三个含有n个元素的整型数组a,b和c，求他们最小的共同元素
+
+解法1： 如果三个数组都有序，则可以设置3个指针，根据3个指针所指的值比较来移动指针。
+
+解法2：
+如果三个数组都无序，可以对数组a，b排序，然后遍历数组c，对于c中的每一个元素在数组a，b中做二分搜索。
+
+#### 找出数组中唯一的重复元素
+给定含有1001个元素的数组，其中存放了1-1000之内的整数，只有一个整数是重复的，请找出这个数
+
+解法：求出整个数组的和，再减去1-1000的和
+
+#### 找出出现奇数次的元素
+给定一个含有n个元素的整型数组a，其中只有一个元素出现奇数次，找出这个元素。
+
+解法：对于任意一个数k，有`k ^ k = 0`，`k ^ 0 = k`，所以将数组a中所有元素进行异或，则个数为偶数的元素异或后都变成了0，只留下了个数为奇数的那个元素。
+
+    public static int find(int[] a) {
+        int k = a[0];
+        for (int i : a) {
+            k^=a[i];
+        }
+        return k;
+    }
+
+#### 求两数组中满足给定和的数对
+给定两个有序整型数组a和b，各有n个元素，求两个数组中满足给定和的数对，即对a中元素i和b中元素j，满足i + j = s(s已知)
+
+解法：利用数组有序特性，设置2个指针i，j分别指向数组a，b的头部。然后从两端向中间遍历，直到交叉。
+
+    public static void findInTwoArray(int[] a, int[] b, int s) {
+        for (int i = 0, j = b.length - 1; i < a.length && j > 0; ) {
+            if (a[i] + b[j] == s) {
+                System.out.println("Found fixed sum with " + a[i] + " " + b[j]);
+                i++;
+                j--;
+            } else if (a[i] + b[j] > s) {
+                j--;
+            } else {
+                i++;
+            }
+        }
+    }
+
+#### 求数组中是否存在3元素之和满足给定数
+给定一无序整型数组a，求数组a中是否有任意3个元素之和等于给定数s
+
+解法：对数组排序，然后设置3个指针i，j，k。i指向头部，j指向i+1个元素，k指向尾部。遍历数组，求a[i],a[j],a[k]之和，如果等于s则输出，反之根据比较值决定i向后移动或k向前移动，直到i，k交叉。
+
+    public static void findThreeTupleSumEqFixedNum(int[] a, int s) {
+        Arrays.sort(a);
+        for (int i = 0; i < a.length - 2; i++) {
+            int j = i + 1;
+            int k = a.length - 1;
+            while (j < k) {
+                if (a[i] + a[j] + a[k] == s) {
+                    System.out.println("Found fixed sum with " + a[i] + " " + a[j] + " " + a[k]);
+                    return;
+                } else if (a[i] + a[j] + a[k] > s) {
+                    k--;
+                } else {
+                    j++;
+                }
+            }
+        }
+    }
+    
+#### 最大子段和
+给定一个整型数组a，求出最大连续子段之和，如果和为负数，则按0计算，比如`1， 2， -5， 6， 8`则输出`14`
+
+    public static void find(int[] a) {
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        for (int i = 0; i < a.length; i++) {
+            sum += a[i];
+            if (sum < 0) {
+                sum = 0;
+            }
+            max = sum > max ? sum : max;
+        }
+        return max;
+    }
+
+#### 最大子段积
+给定一个整型数组a，求出最大连续子段的乘积，比如`1， 2， -8， 12， 7`则输出`84`
+
+解法：和最大子段和类似，注意正负符号。
+
+    public static int findMaxMultiply(int[] a) {
+        int max = 1;
+        int min = 1;
+        int result = 1;
+
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] > 0) {
+                max *= a[i];
+                min = Math.min(min * a[i], 1);
+            } else if (a[i] == 0) {
+                max = 1;
+                min = 1;
+            } else {
+                int temp = max;
+                max = Math.max(min * a[i], 1);
+                min = temp * a[i];
+            }
+            result = Math.max(result, max);
+        }
+
+        return result;
+    }
+
+#### 数组循环移位
+将一个含有n个元素的数组向右循环移动k位，要求时间复杂度是O(n)，且只能使用两个额外的变量。要求时间复杂度不超过`O(n)`，空间复杂度不超过`O(1)`
+
+例如：数组`1,2,3,4,5` 循环2位后为`4,5,1,2,3`
+
+解法：将数组分为两部分`1,2,3 | 4,5`，首先逆序第一部分得到`3,2,1 | 4,5`，然后逆序第二部分得到`3,2,1 | 5,4`，最后逆序整个数组可得结果`4,5,1,2,3`。需要注意的是k可能大于n，所以实际需要移动的是`k%n`位。
+
+    public static void reverse(int[] a, int start, int end) {
+        while (start < end) {
+            int temp = a[start];
+            a[start++] = a[end];
+            a[end--] = temp;
+        }
+    }
+
+    public static void rotate(int[] a, int k) {
+        int n = a.length;
+        k %= n;
+        reverse(a, 0, n - k - 1);
+        reverse(a, n - k, n - 1);
+        reverse(a, 0, n - 1);
+    }
+    
+#### 合并两个数组
+给定含有n个元素的有序（非降序）整型数组a和含有m个元素的有序（非降序）整型数组b。合并两个数组中的元素到整型数组c，要求去除重复元素并保持c有序（非降序）。例子如下
+a = 1, 2, 4, 8
+b = 1, 3, 5, 8
+c = 1, 2, 3, 4, 5, 8
+
+解法：利用数组有序特性，设置指针i，j分别指向数组a，b头部。比较是a[i], b[j]
+
++ a[i] > b[j] 则c[k] = b[j] 向后移动j
++ a[i] == b[k] 则 c[k] = a[i] 向后移动i，j
++ a[i] < b[j] 则c[k] = a[i] 向后移动i
+
+最后将数组a或数组b中剩余的元素填入数组c即可
+
+    public static int[] merge(int[] a, int[] b) {
+        int[] c = new int[a.length + b.length];
+        int i = 0, j = 0, k = 0;
+        while(i < a.length && j < b.length) {
+            if (a[i] > b[j]) {
+                c[k++] = b[j++];
+            } else if (a[i] < b[j]) {
+                c[k++] = a[i++];
+            } else {
+                c[k++] = a[i++];
+                j++;
+            }
+        }
+        // if array a and array b are not the same length
+        while (i < a.length) {
+            c[k++] = a[i++];
+        }
+        while (j < b.length) {
+            c[k++] = b[j++];
+        }
+        return Arrays.copyOfRange(c, 0, k);
+    }
+
+#### 重排问题
+给定含有n个元素的整型数组a，其中包括0元素和非0元素，对数组进行排序，要求：
+1. 排序后所有0元素在前，所有非零元素在后，且非零元素排序前后相对位置不变
+2. 不能使用额外存储空间
+例子如下
+输入 0, 3, 0, 2, 1, 0, 0
+输出 0, 0, 0, 0, 3, 2, 1
+
+解法：从后向前遍历整个数组，遇到某个位置i上的元素是非0元素时，如果a[k]为0，则将a[i]赋值给a[k]，a[k]赋值为0。实际上i是非0元素的下标，而k是0元素的下标
+
+    public static int[] zeroFirst(int[] a) {
+        for (int i = a.length - 1, k = a.length - 1; i >= 0; i--) {
+            if (a[i] != 0) {
+                if (a[k] == 0) {
+                    a[k] = a[i];
+                    a[i] = 0;
+                }
+                k--;
+            }
+        }
+        return a;
+    }
+
+#### 重排问题2 - 奇偶数分开
+给定含有n个元素的整型数组a，将奇数都归到数组的左边，偶数归到数组的右边，不考虑元素的相对顺序。要求时间复杂度为`O(n)`
+
+解法：类似于QuickSort的partition，设置left，right两个指针分别指向数组的头尾向中间移动。
+
+    public static boolean isOdd(int a) {
+        return (a & 1) == 1;
+    }
+
+    public static int[] oddLeftEvenRight(int[] a) {
+        int left = 0;
+        int right = a.length - 1;
+        while (left < right) {
+            while (left < right && isOdd(a[left])) {
+                left++;
+            }
+            while (left < right && !isOdd(a[right])) {
+                right--;
+            }
+            if (left != right) {
+                int temp = a[left];
+                a[left] = a[right];
+                a[right] = temp;
+            }
+        }
+        return a;
+    }
+    
+#### 找出绝对值最小的元素
+给定一个有序整数序列（非递减序），可能包含负数，找出其中绝对值最小的元素，比如给定序列`-5, -3, -1, 2, 8` 则返回1。
+
+解法：有序数组查找首先考虑二分搜索，逻辑修改如下
+
++ 如果给定数组中均为负数，则绝对值最小的是最后一个元素
++ 如果给定数组中均为正数，则绝对值最小的是第一个元素
++ 如果既有正数又有负数，则绝对值最小的元素一定在正负数连接处
+
+代码
+
+    public static int findMinAbsElement(int[] a) {
+        int n = a.length;
+        if (n == 1) {
+            return a[0];
+        }
+        if (isSameSign(a[0], a[n - 1])) {
+            return a[0] > 0 ? a[0] : a[n - 1];
+        }
+        int left = 0;
+        int right = n - 1;
+        while (left < right) {
+            if (left + 1 == right) {
+                return Math.min(Math.abs(a[left]), Math.abs(a[right]));
+            }
+            int m = left + ((right - left) >> 1);
+            if (isSameSign(a[left], a[m])) {
+                left = m;
+                continue;
+            }
+            if (isSameSign(a[m], a[right])) {
+                right = m;
+                continue;
+            }
+        }
+        return -1;
+    }
+
+    public static boolean isSameSign(int a, int b) {
+        return a > 0 && b > 0 || a < 0 && b < 0;
+    }
+
+#### 找出数组中第k小的元素
+给定一无序整型数组a，在不排序的情况下，查找第k小的元素
+
+解法：查找元素优先考虑二分搜索，因为数组无序，所以需要对二分搜索作出修改。参考QuickSort的partition过程。首选在数组中任选一个元素做参考值，将比参考值小的元素都移动到参考值的左边，比参考值大的元素都移动到右边。判断左边数组的长度若大于k，则第k小的值一定在左边，只需要在左边部分重复在这一过程。若左边数组长度小于k，则在右边数组重复这一过程，只不过查找的是k减去左边数组的长度。
+
+    static Random random = new Random();
+
+    public static int findKSmallestElement(int[] a, int k) {
+        int left = 0;
+        int right = a.length - 1;
+        while (left <= right) {
+            int pivotIndex = left + random.nextInt(right - left + 1);
+            int idx = partition(a, left, right, pivotIndex);
+            int length = idx - left +1;
+            if (k < length) {
+                right = idx - 1;
+            } else if (k > length) {
+                left = idx + 1;
+                k = k - length;
+            } else {
+                return a[idx];
+            }
+        }
+        return Integer.MIN_VALUE;
+    }
+
+    private static int partition(int[] a, int left, int right, int pivotIndex) {
+        int pivotValue = a[pivotIndex];
+        swap(a, pivotIndex, right);
+        int storedIndex = left;
+        for (int i = left; i < right; i++) {
+            if (a[i] < pivotValue) {
+                swap(a, i, storedIndex);
+                storedIndex++;
+            }
+        }
+        swap(a, storedIndex, right);
+        return storedIndex;
+    }
+
+    private static void swap(int[] a, int src, int target) {
+        int temp = a[src];
+        a[src] = a[target];
+        a[target] = temp;
+    }
+
+### 字符串类
+
+#### 字符串反转
+给定一个含有n个元素的字符数组a，将其原地逆序。
+
+解法：设置2个指针分别指向头尾，交换两指针所指向的字符，逐渐向中间靠拢直到指针交叉。
+
+    public static char[] reverseString(char[] a) {
+        int left = 0;
+        int right = a.length -1;
+        while (left < right) {
+            char temp = a[left];
+            a[left++] = a[right];
+            a[right--] = temp;
+        }
+        return a;
+    }
+
+#### 字符串反转2 - 反转单词出现顺序
+给定一个字符串，反转其中单词出现的顺序，单词本身不反转。
+例如字符串s1 = "This is a sentence" 反转后得到"sentence a is This"
+
+解法：先反转整个字符串，再单独反转每一个单词即可。
+
+    public static char[] reverseString(char[] a, int left, int right) {
+        while (left < right) {
+            char temp = a[left];
+            a[left++] = a[right];
+            a[right--] = temp;
+        }
+        return a;
+    }
+
+    public static char[] reverseSentence(char[] s) {
+        reverseString(s, 0, s.length - 1);
+
+        int left = 0;
+        int right = 0;
+        for (int i = 0; i < s.length; i++) {
+            if (s[i] == ' ') {
+                reverseString(s, left, right - 1);
+                left = i + 1;
+                right = left;
+            } else {
+                right++;
+            }
+        }
+        reverseString(s, left, right - 1);
+        return s;
+    }
+
+#### 判断字符串中字符是否唯一
+给定一含有n元素的字符串（假定都是ASCII字符），判断该字符串中的各个字符是否唯一。要求时间复杂度为`O(n)`
+
+解法：新建一布尔数组，遍历字符串中每个字符，判断其在布尔数组中是否重复出现。
+
+    public static boolean isCharAllUnique(String s) {
+        boolean[] map = new boolean[256];
+        for (int i = 0; i < s.length(); i++) {
+            if (map[s.charAt(i)]) {
+                return false;
+            } else {
+                map[s.charAt(i)] = true;
+            }
+        }
+        return true;
+    }
+    
+#### 判断两字符串是否旋转关系
+给定两个字符串s1，s2.判断s2是否由s1旋转得来。例如s1 = "waterbottle", s2 = "terbottlewa"，则判断为true。若s1 = "dog", s2 = "god" 则返回false
+
+解法：将s2 加上（concat）其本身得到新字符串s3，如果s1是s3的子串（substring）则判断为true
+
+### 链表类
+
+单链表数据结构为
+
+    public class Node {
+        int value;
+        Node next;
+        public Node(int value) {
+           this.value = value;
+        }
+    ｝
+
+#### 反转单链表
+给定一单链表 1->2->3->4，要求在`O(n)`时间复杂度内反转得到新的单链表 4->3->2->1
+
+    public static Node reverse(Node head) {
+        Node pre = null;
+        Node next = null;
+        Node current = head;
+        while (current != null) {
+            next = current.next;
+            current.next = pre;
+            pre = current;
+            current = next;
+        }
+        return pre;
+    }
+
+#### 判断单链表是否存在环
+
+解法：设置2个指针p1，p2均指向链表头部，p1每次向后移动一格，p2每次向后移动2格。如果p2 == p1则说明链表中存在环。
+
+    public static boolean isCircular(Node head) {
+        Node p1 = head;
+        Node p2 = head;
+
+        while (p2 != null && p2.next != null) {
+            p1 = p1.next;
+            p2 = p2.next.next;
+
+            if (p1 == p2) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+    
+#### 查找链表中离尾部距离为n的元素
+
+解法：设置2个指针p1，p2均指向头部。将p2向后移动n-1步，则p1和p2的距离为n。移动p2到尾部，则p1就是那个要找的元素。
+
+#### 链表数值求和
+给定2个单链表，链表中每个元素的值均是一个整型。链表表达的数字是反向存储的，即第一位数字存储在链表的头部。实现一个函数将两个链表所表达的数字相加并且以同样的链表格式返回。
+
+例如 (3->1->5), (5->9->2) 输出为 8->0->8
+
+解法：
+
+    public static Node addList(Node n1, Node n2, int carry) {
+        if (n1 == null && n2 == null) {
+            return null;
+        }
+        Node result = new Node(carry);
+        int value = carry;
+        if (n1 != null) {
+            value += n1.value;
+        }
+        if (n2 != null) {
+            value += n2.value;
+        }
+        result.value = value % 10;
+        Node more = addList(n1 == null ? null : n1.next, n2 == null ? null : n2.next, value >= 10 ? 1 : 0);
+        result.next = more;
+        return result;
+    }
+
+### 栈和队列类
