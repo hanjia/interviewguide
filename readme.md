@@ -18,7 +18,7 @@
 
 解法1：排序，然后找中间的元素。如果该元素出现超过次数超过一半则一定位于排序后的数组中间。
 
-解法2：设置一个当前值和当前值出现次数的计数器，初始化为第一个元素，计数器值为1.然后从第二个元素开始遍历数组。如果第i个元素值等于当前值则计数器加1，不等则计数器减1，如果计数器值小于1则更新当前值并重置计数器值为1.遍历完成后的当前值即为出现超过一半的元素。
+解法2：设置一个当前值和当前值出现次数的计数器，初始化为第一个元素，计数器值为1.然后从第二个元素开始遍历数组。如果第i个元素值等于当前值则计数器加1，不等则计数器减1，如果计数器值小于1则更新当前值并重置计数器值为1.遍历完成后的当前值即为出现超过一半的元素。注意：该方法不仅能求出现次数超过一半的元素还能求得数组中出现次数最多的元素（不需要超过一半）
 
     public static int find(int[] a, int n) {
         int current = a[0];
@@ -541,3 +541,136 @@ c = 1, 2, 3, 4, 5, 8
     }
 
 ### 栈和队列类
+用链表做存储，栈的数据结构实现如下
+
+    public class HStack {
+        Node head;
+        int size;
+    
+        public void push(int value) {
+            Node node = new Node(value);
+            if (head == null) {
+                head = node;
+            } else {
+                node.next = head;
+                head = node;
+            }
+            size++;
+        }
+    
+        public int size() {
+            return this.size;
+        }
+    
+        public int pop() {
+            int value = head.value;
+            head = head.next;
+            size--;
+            return value;
+        }
+    
+        public boolean isEmpty() {
+            return head == null;
+        }
+    
+        public int peek() {
+            return head.value;
+        }
+    }
+    
+#### 递归颠倒栈內元素
+给定一含有多个元素的栈，用递归颠倒栈內元素。例如栈内元素为`{1,2,3,4,5}` 1在栈顶，颠倒后成为`｛5，4，3，2，1｝` 5在栈顶。
+
+    public static void reverseStack(HStack stack) {
+        if (!stack.isEmpty()) {
+            int data = stack.pop();
+            reverseStack(stack);
+            insertAtBottom(stack, data);
+        }
+    }
+
+    public static void insertAtBottom(HStack stack, int value) {
+        if (stack.isEmpty()) {
+            stack.push(value);
+        } else{
+            int data = stack.pop();
+            insertAtBottom(stack, value);
+            stack.push(data);
+        }
+    }
+
+#### 实现min函数的栈
+定义栈的数据结构，要求添加一个min函数，能够得到栈的最小元素。要求函数min、push以及pop的时间复杂度都是O(1)。
+
+解法：在栈內另存一个栈来保存最小值。
+
+    public class HStackWithMin extends HStack{
+        HStack minStack;
+    
+        @Override
+        public void push(int value) {
+            if (value < min()) {
+                minStack.push(value);
+            }
+            super.push(value);
+        }
+    
+        @Override
+        public int pop() {
+            int value = super.pop();
+            if (value == min()) {
+                minStack.pop();
+            }
+            return value;
+        }
+    
+        public int min() {
+            if (minStack.isEmpty()) {
+                return Integer.MAX_VALUE;
+            }
+            return minStack.peek();
+        }
+    }
+    
+#### 用两个栈来实现队列
+
+解法：栈和队列的区别在于访问策略，栈是FILO，队列是FIFO。假设有栈s1，s2，在读取元素的时候，第一次将s1所有元素出栈并压入s2，之后只要判断s2不为空则直接从s2 pop出第一个元素，当s2为空时重复s1出栈并压入s2的过程即可实现队列。
+    public class MyQueue {
+        HStack s1;
+        HStack s2;
+    
+        public void add(int value) {
+            s1.push(value);
+        }
+    
+        public int size() {
+            return s1.size() + s2.size();
+        }
+    
+        public int remove(){
+            if (!s2.isEmpty()) {
+                return s2.pop();
+            }
+            while (!s1.isEmpty()) {
+                s2.push(s1.pop());
+            }
+            return s2.pop();
+        }
+    }
+    
+#### 栈的排序
+编写程序将一给定栈的元素以升序排列，栈类上只有4个方法可用，`pop`,`push`,`peek`,`isEmpty`
+
+例如给定栈s1 = {4, 3, 1, 5, 2} 2为栈顶，排序后得到 s2 = {1, 2, 3, 4, 5} 5为栈顶
+
+    public static HStack sort(HStack stack) {
+        HStack r = new HStack();
+        while (!stack.isEmpty()) {
+            int tmp = stack.pop();
+            while (!r.isEmpty() && r.peek() > tmp) {
+                stack.push(r.pop());
+            }
+            r.push(tmp);
+        }
+        return r;
+    }
