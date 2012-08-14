@@ -789,6 +789,8 @@ c = 1, 2, 3, 4, 5, 8
 
 解法：因为是二叉查找树，所以很简单。最近共同父节点的值n和任意两个节点n1，n2之间一定满足关系`n1<n<n2`
 
+非递归实现
+
     public static int findCommonAncestor(BinarySearchTreeNode root, BinarySearchTreeNode t1, BinarySearchTreeNode t2) {
         int left = t1.value;
         int right = t2.value;
@@ -814,6 +816,8 @@ c = 1, 2, 3, 4, 5, 8
             }
         }
     }
+
+递归实现
 
     public static int findCommonAncestorRecursive(BinarySearchTreeNode root, BinarySearchTreeNode n1, BinarySearchTreeNode n2) {
         if (n1.value < root.value && n2.value > root.value) {
