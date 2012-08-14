@@ -674,3 +674,155 @@ c = 1, 2, 3, 4, 5, 8
         }
         return r;
     }
+    
+### 树类
+
+二叉查找树 Binary search tree 的定义
+
++ 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值
++  若它的右子树不空，则右子树上所有结点的值均大于它的根结点的
++  左、右子树也分别为二叉排序树
+
+#### 二叉查找树插入子节点
+
+    public boolean addNode(int value) {
+        BinarySearchTreeNode current = this;
+        BinarySearchTreeNode parent = this;
+        while (current != null) {
+            parent = current;
+            if (value == parent.value) {
+                return false; // duplicate value;
+            } else if (value < parent.value) {
+                current = parent.left;
+            } else {
+                current = parent.right;
+            }
+        }
+        if (parent == null) {
+            parent = new BinarySearchTreeNode(value);
+        }else if (value < parent.value) {
+            parent.left = new BinarySearchTreeNode(value);
+        }else{
+            parent.right = new BinarySearchTreeNode(value);
+        }
+        return true;
+    }    
+
+#### 如何判断树是否平衡二叉树
+
+平衡二叉树Balanced binary tree 的定义是它是一 棵空树或它的左右两个子树的高度差的绝对值不超过1。
+
+    public static int getMaxDepth(BinarySearchTreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.max(getMaxDepth(root.left), getMaxDepth(root.right));
+    }
+
+    public static int getMinDepth(BinarySearchTreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + Math.min(getMinDepth(root.left), getMinDepth(root.right));
+    }
+
+    public static boolean isBalanced(BinarySearchTreeNode root) {
+        return (getMaxDepth(root) - getMinDepth(root)) <= 1;
+    }
+    
+#### 判断两颗二叉树是否相等
+
+解法：递归判断很简单
+
+    public static boolean isTreeEquals(BinarySearchTreeNode t1, BinarySearchTreeNode t2) {
+        if (t1 == t2) {
+            return true;
+        }
+        return (t1.value == t2.value) && isTreeEquals(t1.left, t2.left) && isTreeEquals(t1.right, t2.right);
+    }
+    
+#### 二叉树的遍历
+
+二叉树的遍历分前序 preorder，中序 inorder，后序 postorder，这三种统称深度优先遍历 Depth-first traversal，还有一种是广度优先遍历 Breadth-first traversal
+
+##### 前序遍历的非递归实现
+
+要点在于用栈来保存左右节点
+
+    public static void preOrderNoRecursive(BinarySearchTreeNode root) {
+        Stack<BinarySearchTreeNode> s = new Stack();
+        BinarySearchTreeNode node = null;
+        s.push(root);
+        while (!s.isEmpty()) {
+            node = s.pop();
+            visit(node);
+            if (node.right != null) {
+                s.push(node.right);
+            }
+            if (node.left != null) {
+                s.push(node.left);
+            }
+        }
+    }
+
+##### 广度优先遍历的非递归实现
+
+要点在于用队列来保存左右节点
+
+    public static void breadthFirstTraversal(BinarySearchTreeNode root) {
+        ArrayDeque<BinarySearchTreeNode> queue = new ArrayDeque<BinarySearchTreeNode>();
+        BinarySearchTreeNode node = null;
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            node = queue.remove();
+            visit(node);
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+        }
+    }
+    
+#### 找出二叉查找树Binary search tree上任意两个节点的最近共同父节点。
+
+解法：因为是二叉查找树，所以很简单。最近共同父节点的值n和任意两个节点n1，n2之间一定满足关系`n1<n<n2`
+
+    public static int findCommonAncestor(BinarySearchTreeNode root, BinarySearchTreeNode t1, BinarySearchTreeNode t2) {
+        int left = t1.value;
+        int right = t2.value;
+        BinarySearchTreeNode parent = null;
+
+        if (left > right) {
+            int temp = left;
+            left = right;
+            right = temp;
+        }
+
+        while (true) {
+            if (root.value < left) {
+                parent = root;
+                root = root.right;
+            } else if (root.value > right) {
+                parent = root;
+                root = root.left;
+            } else if (root.value == left || root.value == right) {
+                return parent.value;
+            } else {
+                return root.value;
+            }
+        }
+    }
+
+    public static int findCommonAncestorRecursive(BinarySearchTreeNode root, BinarySearchTreeNode n1, BinarySearchTreeNode n2) {
+        if (n1.value < root.value && n2.value > root.value) {
+            return root.value;
+        }
+        if (n1.value < root.value && n2.value < root.value) {
+            return findCommonAncestorRecursive(root.left, n1, n2);
+        } else if (n1.value > root.value && n2.value > root.value) {
+            return findCommonAncestorRecursive(root.right, n1, n2);
+        }
+        return -1;
+    }
