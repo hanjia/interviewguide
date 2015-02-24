@@ -1,11 +1,13 @@
 #Interview Review
 ##Overview
 1. 数组类
-
 - 对于数组查找问题，如果数组有序则首先应该想到做二分搜索，时间复杂度为`O(logn)`。如果数组无序，则考虑排序，MergeSort或QuickSort都可以在`O(nlogn)`内完成排序，接着可以考虑二分搜索。
 - 对于两个有序数组的问题（如合并，给定和的数对等），应该考虑利用数组有序特性，设置2个指针分别从两个数组的头部开始遍历
 
 2. 字符串类
+- 字符可以用ASCII码表示，并且用数组的Index来表示
+
+
 3. 链表类
 4. 栈和队列类
 5. 树类
@@ -354,7 +356,7 @@ c = 1, 2, 3, 4, 5, 8
         return a > 0 && b > 0 || a < 0 && b < 0;
     }
 
-#### 找出数组中第k小的元素
+#### 找出数组中第k小的元素 ***
 给定一无序整型数组a，在不排序的情况下，查找第k小的元素
 
 解法：查找元素优先考虑二分搜索，因为数组无序，所以需要对二分搜索作出修改。参考QuickSort的partition过程。首选在数组中任选一个元素做参考值，将比参考值小的元素都移动到参考值的左边，比参考值大的元素都移动到右边。判断左边数组的长度若大于k，则第k小的值一定在左边，只需要在左边部分重复在这一过程。若左边数组长度小于k，则在右边数组重复这一过程，只不过查找的是k减去左边数组的长度。
@@ -399,6 +401,54 @@ c = 1, 2, 3, 4, 5, 8
         a[src] = a[target];
         a[target] = temp;
     }
+
+
+#### 找出两个有序数组的中位数 ***
+给定两个有序整型数组A，B，查找两个数组合并后的中位数，要求时间复杂度不超过`O(log(n+m))`
+
+解法1：可以将两个数组拼凑成一个数组然后使用与上一题相同的方法解，即查找第K个元素
+解法2：假设两个数组中位数为合并后第k小的元素，比较A[k/2 - 1] 与 B[k/2 - 1]
+
+如果A[k/2 - 1] < B[k/2 - 1]则意味着A[0]到A[k/2 - 1]全部小于中位数，所以可以忽略
+如果A[k/2 - 1] > B[k/2 - 1]则意味着B[0]到B[k/2 - 1]全部小于中位数，所以可以忽略
+如果A[k/2 - 1] = B[k/2 - 1]则意味着已经找到中位数
+
+前两种情况则需要采用递归
+
+	public double findMedianSortedArrays(int A[], int B[]) {
+	        int m = A.length;
+	        int n = B.length;
+	        int total = A.length + B.length;  
+	        if (total%2 != 0)
+	            return (double)findKth(A, 0, m-1, B, 0, n-1, total/2 + 1);
+	        else {
+	            return (double)(findKth(A, 0, m-1, B, 0, n-1, total/2) + findKth(A, 0, m-1, B, 0, n-1, total/2 + 1))/2;
+	        }
+		}
+	    
+	public int findKth(int a[], int astart, int aend, int b[], int bstart, int bend, int k)  {  
+			int m = aend - astart + 1;
+			int n = bend - bstart + 1;
+		    
+			if(m>n)
+				return findKth(b,bstart,bend,a,astart,aend,k);
+			if(m==0)
+				return b[k-1];
+			if(k==1)
+				return Math.min(a[astart],b[bstart]);
+	   
+			int partA = Math.min(k/2,m);
+			int partB = k - partA;
+			
+			if(a[astart+partA-1] < b[bstart+partB-1])
+				return findKth(a,astart+partA,aend,b,bstart,bend,k-partA);
+			else if(a[astart+partA-1] > b[bstart+partB-1])
+				return findKth(a,astart,aend,b,bstart+partB,bend,k-partB);
+			else
+				return a[astart+partA-1];
+	}
+
+
 
 ### 2. 字符串类
 
