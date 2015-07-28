@@ -8,11 +8,11 @@ public class Test {
     public static void main(String[] args) {
         int[] a = new int[]{1, 3, 5, 8, 11};
 
-        System.out.println(ArraySum.sum(a, a.length));
-        System.out.println(ArrayFindOccurMoreThanHalf.find(new int[]{2, 3, 3, 3, 2, 2, 2, 2}));
-        System.out.println(ArrayFindMinAbs.findMinAbs(new int[]{1, 5, 7, 11, 23, 9, 30}, 7));
+        System.out.println(Problem1_ArraySum.sum(a, a.length));
+        System.out.println(Problem2_ArrayFindOccurMoreThanHalf.find(new int[]{2, 3, 3, 3, 2, 2, 2, 2}));
+        System.out.println(Problem3_ArrayFindMinAbs.findMinAbs(new int[]{1, 5, 7, 11, 23, 9, 30}, 7));
 
-        ArrayFindCommonElements.findCommon(new int[]{1, 2, 4, 6, 8, 11}, new int[]{2, 3, 6, 8, 9});
+        Problem4_ArrayFindCommonElements.findCommon(new int[]{1, 2, 4, 6, 8, 11}, new int[]{2, 3, 6, 8, 9});
 
         System.out.println(ArrayFindElementOccurOdd.find(new int[]{1, 1, 2, 2, 2, 2, 3, 4, 4, 4, 4}));
         ArrayFindFixedSum.findInTwoArray(new int[]{1, 3, 5, 6, 7}, new int[]{2, 4, 9, 11, 12}, 14);
