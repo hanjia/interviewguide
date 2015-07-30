@@ -14,7 +14,7 @@ public class Test {
 
         Problem4_ArrayFindCommonElements.findCommon(new int[]{1, 2, 4, 6, 8, 11}, new int[]{2, 3, 6, 8, 9});
 
-        System.out.println(ArrayFindElementOccurOdd.find(new int[]{1, 1, 2, 2, 2, 2, 3, 4, 4, 4, 4}));
+        System.out.println(Problem7_ArrayFindElementOccurOdd.find(new int[]{1, 1, 2, 2, 2, 2, 3, 4, 4, 4, 4}));
         ArrayFindFixedSum.findInTwoArray(new int[]{1, 3, 5, 6, 7}, new int[]{2, 4, 9, 11, 12}, 14);
         ArrayFindFixedSum.findThreeTupleSumEqFixedNum(new int[]{5, 1, 23, 4, 6, 8, 11, 34, 2, 9}, 37);
         System.out.println("Max sum  is " + ArrayFindMaxSub.findMaxSum(new int[]{1, 2, -5, 6, 8}));
