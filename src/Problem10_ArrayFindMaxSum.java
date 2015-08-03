@@ -1,9 +1,11 @@
 /**
- * User: haozhou
+ * Author: haozhou
  * Date: 8/11/12
  * Time: 1:27 PM
+ * 
+ * 给定一个整型数组a，求出最大连续子段之和，如果和为负数，则按0计算，比如`1， 2， -5， 6， 8`则输出`14`
  */
-public class ArrayFindMaxSub {
+public class Problem10_ArrayFindMaxSum {
     public static int findMaxSum(int[] a) {
         int max = Integer.MIN_VALUE;
         int sum = 0;
@@ -12,31 +14,13 @@ public class ArrayFindMaxSub {
             if (sum < 0) {
                 sum = 0;
             }
-            max = sum > max ? sum : max;
+            max = (sum > max) ? sum : max;
         }
         return max;
     }
 
-    public static int findMaxMultiply(int[] a) {
-        int max = 1;
-        int min = 1;
-        int result = 1;
-
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] > 0) {
-                max *= a[i];
-                min = Math.min(min * a[i], 1);
-            } else if (a[i] == 0) {
-                max = 1;
-                min = 1;
-            } else {
-                int temp = max;
-                max = Math.max(min * a[i], 1);
-                min = temp * a[i];
-            }
-            result = Math.max(result, max);
-        }
-
-        return result;
+    public static void main(String[] args){
+    	int[] a = {1, 2, -5, 6, 8};
+    	System.out.println(findMaxSum(a));
     }
 }
