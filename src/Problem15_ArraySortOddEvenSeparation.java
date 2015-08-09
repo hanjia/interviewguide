@@ -1,22 +1,11 @@
+import java.util.Arrays;
+
 /**
  * User: haozhou
  * Date: 8/11/12
  * Time: 2:13 PM
  */
-public class ArraySort {
-
-    public static int[] zeroFirst(int[] a) {
-        for (int i = a.length - 1, k = a.length - 1; i >= 0; i--) {
-            if (a[i] != 0) {
-                if (a[k] == 0) {
-                    a[k] = a[i];
-                    a[i] = 0;
-                }
-                k--;
-            }
-        }
-        return a;
-    }
+public class Problem15_ArraySortOddEvenSeparation {
 
     public static boolean isOdd(int a) {
         return (a & 1) == 1;
@@ -39,5 +28,10 @@ public class ArraySort {
             }
         }
         return a;
+    }
+    
+    public static void main(String[] args){
+    	int[] a = {1,2,3,4,5,6,7,8,9};
+    	System.out.println(Arrays.toString(oddLeftEvenRight(a)));
     }
 }
