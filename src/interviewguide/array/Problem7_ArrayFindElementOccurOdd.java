@@ -1,3 +1,4 @@
+package interviewguide.array;
 /**
  * Author: haozhou
  * Date: 8/11/12

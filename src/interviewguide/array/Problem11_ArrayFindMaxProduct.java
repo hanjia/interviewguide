@@ -1,3 +1,4 @@
+package interviewguide.array;
 /**
  * 
  * @author hajia

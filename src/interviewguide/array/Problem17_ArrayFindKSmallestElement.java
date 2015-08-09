@@ -1,44 +1,23 @@
+package interviewguide.array;
 import java.util.Random;
 
 /**
  * User: haozhou
  * Date: 8/11/12
  * Time: 3:10 PM
+ * 
+ * 给定一无序整型数组a，在不排序的情况下，查找第k小的元素
  */
-public class ArrayFindElement {
-    public static int findMinAbsElement(int[] a) {
-        int n = a.length;
-        if (n == 1) {
-            return a[0];
-        }
-        if (isSameSign(a[0], a[n - 1])) {
-            return a[0] > 0 ? a[0] : a[n - 1];
-        }
-        int left = 0;
-        int right = n - 1;
-        while (left < right) {
-            if (left + 1 == right) {
-                return Math.min(Math.abs(a[left]), Math.abs(a[right]));
-            }
-            int m = left + ((right - left) >> 1);
-            if (isSameSign(a[left], a[m])) {
-                left = m;
-                continue;
-            }
-            if (isSameSign(a[m], a[right])) {
-                right = m;
-                continue;
-            }
-        }
-        return -1;
-    }
+public class Problem17_ArrayFindKSmallestElement {
+    
+    public static Random random = new Random();
 
-    public static boolean isSameSign(int a, int b) {
-        return a > 0 && b > 0 || a < 0 && b < 0;
-    }
-
-    static Random random = new Random();
-
+    /*
+     * 解法：查找元素优先考虑二分搜索，因为数组无序，所以需要对二分搜索作出修改。参考QuickSort的partition过程。
+     * 首选在数组中任选一个元素做参考值，将比参考值小的元素都移动到参考值的左边，比参考值大的元素都移动到右边。
+     * 判断左边数组的长度若大于k，则第k小的值一定在左边，只需要在左边部分重复在这一过程。
+     * 若左边数组长度小于k，则在右边数组重复这一过程，只不过查找的是k减去左边数组的长度。
+     */
     public static int findKSmallestElement(int[] a, int k) {
         int left = 0;
         int right = a.length - 1;
@@ -76,5 +55,10 @@ public class ArrayFindElement {
         int temp = a[src];
         a[src] = a[target];
         a[target] = temp;
+    }
+    
+    public static void main(String[] args){
+    	int[] a = {1,3,7,4,9,6,2,0};
+    	System.out.println(findKSmallestElement(a,2));
     }
 }
