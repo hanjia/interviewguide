@@ -1,3 +1,5 @@
+import interviewguide.linkedlist.Node;
+
 /**
  * User: haozhou
  * Date: 8/11/12
