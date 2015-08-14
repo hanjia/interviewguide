@@ -1,4 +1,4 @@
-package interviewguide.chararray;
+package interviewguide.string;
 
 /**
  * 给定一个含有n个元素的字符数组a，将其原地逆序。

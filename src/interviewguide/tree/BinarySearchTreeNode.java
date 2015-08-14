@@ -1,3 +1,4 @@
+package interviewguide.tree;
 /**
  * User: haozhou
  * Date: 8/13/12
@@ -26,6 +27,7 @@ public class BinarySearchTreeNode {
                 current = parent.right;
             }
         }
+        
         if (parent == null) {
             parent = new BinarySearchTreeNode(value);
         }else if (value < parent.value) {

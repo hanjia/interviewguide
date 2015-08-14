@@ -1,4 +1,4 @@
-package interviewguide.chararray;
+package interviewguide.string;
 
 /**
  * 给定两个字符串s1，s2.判断s2是否由s1旋转得来。

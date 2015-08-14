@@ -1,3 +1,4 @@
+package interviewguide.stackandqueue;
 import interviewguide.linkedlist.Node;
 
 /**

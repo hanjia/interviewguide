@@ -1,4 +1,4 @@
-package interviewguide.chararray;
+package interviewguide.string;
 
 /**
  * 给定一含有n元素的字符串（假定都是ASCII字符），判断该字符串中的各个字符是否唯一。要求时间复杂度为O(n)

@@ -1,4 +1,4 @@
-package interviewguide.chararray;
+package interviewguide.string;
 
 /**
  * 给定一个字符串，反转其中单词出现的顺序，单词本身不反转。 
