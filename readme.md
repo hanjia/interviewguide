@@ -14,7 +14,7 @@
 	4. 栈和队列类
 	5. 树类
 
-##Problems & Solutions
+##Problems & Solutions (37 Problems)
 
 ### 1. 数组类
 
