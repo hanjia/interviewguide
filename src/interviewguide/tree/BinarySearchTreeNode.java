@@ -1,6 +1,6 @@
 package interviewguide.tree;
 /**
- * User: haozhou
+ * Author: haozhou, hanjia
  * Date: 8/13/12
  * Time: 8:23 PM
  */
@@ -13,13 +13,13 @@ public class BinarySearchTreeNode {
         this.value = value;
     }
 
-    public BinarySearchTreeNode addNode(int value) {
-        BinarySearchTreeNode current = this;
-        BinarySearchTreeNode parent = this;
+    public BinarySearchTreeNode addNode(BinarySearchTreeNode root, int value) {
+        BinarySearchTreeNode current = root;
+        BinarySearchTreeNode parent = root;
         while (current != null) {
             parent = current;
             if (value == parent.value) {
-                return null; // duplicate value;
+                return root; // duplicate value;
             }
             if (value < parent.value) {
                 current = parent.left;
@@ -28,15 +28,12 @@ public class BinarySearchTreeNode {
             }
         }
         
-        if (parent == null) {
-            parent = new BinarySearchTreeNode(value);
-        }else if (value < parent.value) {
+        if (value < parent.value) {
             parent.left = new BinarySearchTreeNode(value);
             return parent.left;
         }else{
             parent.right = new BinarySearchTreeNode(value);
             return parent.right;
         }
-        return null;
-    }
+    }  
 }

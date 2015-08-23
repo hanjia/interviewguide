@@ -526,6 +526,12 @@ c = 1, 2, 3, 4, 5, 8
 
 解法：将s2 加上（concat）其本身得到新字符串s3，如果s1是s3的子串（substring）则判断为true
 
+	public static boolean isRotatedString(String s1, String s2){
+		return (s2+s2).contains(s1);	
+	}
+	
+	
+	
 ### 3. 链表类
 
 单链表数据结构为
@@ -603,7 +609,30 @@ c = 1, 2, 3, 4, 5, 8
         return result;
     }
     
-#### Problem 5: 链表查找环
+#### Problem 5: 链表查找环的开始
+
+    public static Node findBeginning(Node head) {
+        Node p1 = head;
+        Node p2 = head;
+
+        while (p2.next != null) {
+            p1 = p1.next;
+            p2 = p2.next.next;
+            if (p1 == p2) {
+               break;
+            }
+        }
+        // no meeting point and therefore no loop
+        if (p2.next == null) {
+            return null;
+        }
+        p1 = head;
+        while (p1 != p2) {
+            p1=p1.next;
+            p2=p2.next;
+        }
+        return p2;
+    }
 
 
 
@@ -742,7 +771,9 @@ c = 1, 2, 3, 4, 5, 8
         }
         return r;
     }
-    
+     
+   
+  
 ### 5. 树类
 
 二叉查找树 Binary search tree 的定义
@@ -751,7 +782,7 @@ c = 1, 2, 3, 4, 5, 8
 +  若它的右子树不空，则右子树上所有结点的值均大于它的根结点的
 +  左、右子树也分别为二叉排序树
 
-#### 二叉查找树插入子节点
+#### Problem 1: 二叉查找树插入子节点
 
     public boolean addNode(int value) {
         BinarySearchTreeNode current = this;
@@ -776,7 +807,7 @@ c = 1, 2, 3, 4, 5, 8
         return true;
     }    
 
-#### 如何判断树是否平衡二叉树
+#### Problem 2: 如何判断树是否平衡二叉树
 
 平衡二叉树Balanced binary tree 的定义是它是一 棵空树或它的左右两个子树的高度差的绝对值不超过1。
 
@@ -798,7 +829,7 @@ c = 1, 2, 3, 4, 5, 8
         return (getMaxDepth(root) - getMinDepth(root)) <= 1;
     }
     
-#### 判断两颗二叉树是否相等
+#### Problem 3: 判断两颗二叉树是否相等
 
 解法：递归判断很简单
 
@@ -813,7 +844,7 @@ c = 1, 2, 3, 4, 5, 8
 
 二叉树的遍历分前序 preorder，中序 inorder，后序 postorder，这三种统称深度优先遍历 Depth-first traversal，还有一种是广度优先遍历 Breadth-first traversal
 
-##### 前序遍历的非递归实现
+#### Problem 4: 前序遍历的非递归实现
 
 要点在于用栈来保存左右节点
 
@@ -833,7 +864,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     }
 
-##### 广度优先遍历的非递归实现
+#### Problem 5: 广度优先遍历的非递归实现
 
 要点在于用队列来保存左右节点
 
@@ -853,7 +884,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     }
     
-#### 找出二叉查找树Binary search tree上任意两个节点的最近共同父节点。
+#### Problem 6: 找出二叉查找树上任意两个节点的最近共同父节点。
 
 解法：因为是二叉查找树，所以很简单。最近共同父节点的值n和任意两个节点n1，n2之间一定满足关系`n1<n<n2`
 
