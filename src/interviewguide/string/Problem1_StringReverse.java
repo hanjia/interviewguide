@@ -5,7 +5,7 @@ package interviewguide.string;
  * @author hanjia
  *
  */
-public class Problem1_CharArrayReverse {
+public class Problem1_StringReverse {
 
 	/*
 	 * 解法：设置2个指针分别指向头尾，交换两指针所指向的字符，逐渐向中间靠拢直到指针交叉。

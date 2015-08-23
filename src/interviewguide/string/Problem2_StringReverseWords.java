@@ -6,7 +6,7 @@ package interviewguide.string;
  * @author hanjia
  *
  */
-public class Problem2_CharArrayReverseWords {
+public class Problem2_StringReverseWords {
 
 	/*
 	 * 解法：先反转整个字符串，再单独反转每一个单词即可。与Array问题中Problem12解法相似。

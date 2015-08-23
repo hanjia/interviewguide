@@ -7,7 +7,7 @@ package interviewguide.string;
  * @author hanjia
  *
  */
-public class Problem4_CharArrayRotation {
+public class Problem4_StringRotation {
 
 	/*
 	 * 解法：将s2 加上（concat）其本身得到新字符串s3，如果s1是s3的子串（substring）则判断为true

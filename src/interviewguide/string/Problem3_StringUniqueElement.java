@@ -5,7 +5,7 @@ package interviewguide.string;
  * @author hanjia
  *
  */
-public class Problem3_CharArrayUniqueElement {
+public class Problem3_StringUniqueElement {
 	
 	/*
 	 * 解法：新建一布尔数组，遍历字符串中每个字符，判断其在布尔数组中是否重复出现。相似的解法可用于LeetCode Problem3
