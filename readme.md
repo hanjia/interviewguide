@@ -93,6 +93,7 @@ b = 1, 3, 5, 7, 9
 
 解法2：可以对数组a中每一个元素在数组b中做二分搜索（binary search），这样的话只需要数组b有序即可。
 
+
 #### Problem 5: 求三个数组的共同元素
 给定三个含有n个元素的整型数组a,b和c，求他们最小的共同元素
 
@@ -100,6 +101,31 @@ b = 1, 3, 5, 7, 9
 
 解法2：
 如果三个数组都无序，可以对数组a，b排序，然后遍历数组c，对于c中的每一个元素在数组a，b中做二分搜索。
+
+	public static void findMinCommonElement(int[] a, int[] b, int[] c){
+		Arrays.sort(a);
+		Arrays.sort(b);
+		Arrays.sort(c);
+		for(int i = 0; i < c.length; i++){
+			if(binarySearch(a, c[i]) && binarySearch(b, c[i]))
+				System.out.println(c[i]);
+		}
+	}
+	
+	public static boolean binarySearch(int[] array, int data){
+		if(array.length < 1)
+			return false;
+		int low = 0;
+		int high = array.length - 1;
+		while (low <= high){
+			int mid = low + (high - low) / 2;
+			if(array[mid] == data) return true;
+			else if(array[mid] < data) low = mid + 1;
+			else high = mid - 1;
+		}
+		return false;
+	}
+
 
 #### Problem 6: 找出数组中唯一的重复元素
 给定含有1001个元素的数组，其中存放了1-1000之内的整数，只有一个整数是重复的，请找出这个数
