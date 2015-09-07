@@ -40,8 +40,23 @@ public class Problem16_ArrayMinAbs {
         return (a > 0 && b > 0) || (a < 0 && b < 0);
     }
     
+    public static int findMinAbsElementAlt(int[] a){
+    	if(a[0] >= 0) return Math.abs(a[0]);
+    	if(a[a.length - 1] <= 0) return Math.abs(a[a.length - 1]);
+    	
+    	for(int i = 0; i < a.length - 1; i++){
+    		if(a[i] < 0 && a[i+1] >= 0){
+    			if(a[i] + a[i+1] >= 0) return Math.abs(a[i]);
+    			else return Math.abs(a[i+1]);
+    		}
+    	}
+    	return 0;
+    }
+    
     public static void main(String[] args){
-    	int[] a = {-5, -3, -1, 2, 8};
+    	int[] a = {-5, -3, -1, 1, 2, 8};
     	System.out.println(findMinAbsElement(a));
+    	System.out.println(findMinAbsElementAlt(a));
+
     }
 }

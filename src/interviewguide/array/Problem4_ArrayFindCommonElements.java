@@ -29,10 +29,24 @@ public class Problem4_ArrayFindCommonElements {
         }
     }
     
+    public static void findCommonAlt(int[] a, int[] b) {
+    	int i = 0;
+    	int j = 0;
+    	while(a[i] < b[j]){
+    		i++;
+    	}
+    	while(a[i] > b[j]){
+    		j++;
+    	}
+    	if(a[i] == b[j])
+            System.out.println("Found common: " + a[i]);    	
+    }
+    
     public static void main(String[] args){
     	int[] a = {0, 1, 2, 3, 4};
     	int[] b = {1, 3, 5, 7, 9};
     	findCommon(a,b);
+    	findCommonAlt(a, b);
     }
 
 }

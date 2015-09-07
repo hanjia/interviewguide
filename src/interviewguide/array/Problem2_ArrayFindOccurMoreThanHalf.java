@@ -20,7 +20,7 @@ public class Problem2_ArrayFindOccurMoreThanHalf {
     public static int find(int[] a) {
         int current = a[0];
         int count = 1;
-        for (int i = 1; i < a.length; ++i) {
+        for (int i = 1; i < a.length; i++) {
             if (a[i] == current) {
                 count++;
             } else {
@@ -44,7 +44,8 @@ public class Problem2_ArrayFindOccurMoreThanHalf {
     }
     
     public static void main(String[] args) {
-        System.out.println(find(new int[]{3, 2, 3, 2, 3, 1, 5, 4, 4, 3, 3, 3, 3}));
-        System.out.println(findByAnAlternativeWay(new int[]{3, 2, 3, 2, 3, 1, 5, 4, 4, 3, 3, 3, 3}));
+    	int[] a = new int[]{3, 2, 3, 2, 4, 1, 5, 4, 4, 3, 3, 3, 3, 3, 3};
+        System.out.println(find(a));
+        System.out.println(findByAnAlternativeWay(a));
     }
 }
