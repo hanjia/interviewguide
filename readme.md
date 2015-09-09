@@ -963,3 +963,23 @@ c = 1, 2, 3, 4, 5, 8
         }
         return -1;
     }
+
+
+#### Problem 7: 判断一个二叉树是否为二叉查找树
+解法：采用递归实现中序遍历
+
+	public static boolean checkBSTValid(BinarySearchTreeNode bstNode, int previousValue){
+		if(bstNode == null)
+			return true;
+		
+		if(checkBSTValid(bstNode.left, previousValue)){
+			if (bstNode.value > previousValue) {
+				previousValue = bstNode.value;
+			    return checkBSTValid(bstNode.right, previousValue);
+			} else {
+				return false;
+			}
+		}else {
+		    return false;
+		}
+	}
