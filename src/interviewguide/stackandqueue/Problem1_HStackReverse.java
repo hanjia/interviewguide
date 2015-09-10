@@ -32,8 +32,10 @@ public class Problem1_HStackReverse {
         s1.push(3);
         s1.push(4);
         s1.push(5);
-
         reverseStack(s1);
+        while(s1.size > 0){
+        	System.out.println(s1.pop());
+        }
     }
 
 }

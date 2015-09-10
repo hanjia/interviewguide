@@ -618,6 +618,20 @@ c = 1, 2, 3, 4, 5, 8
 
 解法：设置2个指针p1，p2均指向头部。将p2向后移动n-1步，则p1和p2的距离为n。移动p2到尾部，则p1就是那个要找的元素。
 
+	public static Node nToLastNode(Node head, int n){
+		Node p1 = head;
+		Node p2 = head;
+		while (n > 0){
+			p2 = p2.next;
+			n--;
+		}
+		while(p2.next != null){
+			p2 = p2.next;
+			p1 = p1.next;
+		}
+		return p1;
+	}
+	
 #### Problem 4: 链表数值求和
 给定2个单链表，链表中每个元素的值均是一个整型。链表表达的数字是反向存储的，即第一位数字存储在链表的头部。实现一个函数将两个链表所表达的数字相加并且以同样的链表格式返回。
 
