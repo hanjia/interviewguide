@@ -26,7 +26,7 @@
 
 ### 1. 数组类
 
-#### Problem 1: 数组求和
+#### [Problem 1: 数组求和] (https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem1_ArraySum.java)
 给定一个含有n个元素的整型数组a，求a中所有元素的和。要求使用递归实现。
 
 解法：

@@ -20,8 +20,7 @@ public class BinarySearchTreeNode {
             parent = current;
             if (value == parent.value) {
                 return root; // duplicate value;
-            }
-            if (value < parent.value) {
+            }else if (value < parent.value) {
                 current = parent.left;
             } else {
                 current = parent.right;
