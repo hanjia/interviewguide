@@ -2,11 +2,11 @@ package interviewguide.tree;
 
 public class Problem3_TreeTwoEquals {
 	
-    public static boolean isTreeEquals(BinarySearchTreeNode t1, BinarySearchTreeNode t2) {
+    public static boolean areTwoTreesEqual(BinarySearchTreeNode t1, BinarySearchTreeNode t2) {
         if (t1 == t2) {
             return true;
         }
-        return (t1.value == t2.value) && isTreeEquals(t1.left, t2.left) && isTreeEquals(t1.right, t2.right);
+        return (t1.value == t2.value) && areTwoTreesEqual(t1.left, t2.left) && areTwoTreesEqual(t1.right, t2.right);
     }
     
 	 public static void main(String[] args) {
@@ -28,6 +28,6 @@ public class Problem3_TreeTwoEquals {
 	     root2.addNode(root2, 45);
 	     root2.addNode(root2, 23);      
 	     
-	     System.out.println(isTreeEquals(root1,root2));
+	     System.out.println(areTwoTreesEqual(root1,root2));
 	 }
 }

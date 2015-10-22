@@ -888,7 +888,7 @@ c = 1, 2, 3, 4, 5, 8
         s.push(root);
         while (!s.isEmpty()) {
             node = s.pop();
-            visit(node);
+            System.out.println(node.value);
             if (node.right != null) {
                 s.push(node.right);
             }
