@@ -26,7 +26,7 @@
 
 ### 1. 数组类
 
-#### [Problem 1: 数组求和] (https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem1_ArraySum.java)
+#### [Problem 1: 数组求和](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem1_ArraySum.java)
 给定一个含有n个元素的整型数组a，求a中所有元素的和。要求使用递归实现。
 
 解法：
@@ -35,7 +35,7 @@
         return n == 0 ? 0 : sum(a, n - 1) + a[n - 1];
     }
 
-#### Problem 2: 求数组中出现次数超过一半的元素
+#### [Problem 2: 求数组中出现次数超过一半的元素](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem2_ArrayFindOccurMoreThanHalf.java)
 给定一个n个整型元素的数组a，其中有一个元素出现次数超过n / 2，求这个元素。
 
 解法1：排序，然后找中间的元素。如果该元素出现超过次数超过一半则一定位于排序后的数组中间。
@@ -60,7 +60,7 @@
         return current;
     }
 
-#### Problem 3: 求数组中元素的最短距离
+#### [Problem 3: 求数组中元素的最短距离](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem3_ArrayFindMinAbs.java)
 给定一个含有n个元素的整型数组，找出数组中的两个元素x和y使得abs(x - y)值最小
 
 解法：对数组排序，然后遍历一遍求前后两元素差值即可求出。
@@ -76,7 +76,7 @@
         return min;
     }
 
-#### Problem 4: 求两个有序数组的共同元素
+#### [Problem 4: 求两个有序数组的共同元素](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem4_ArrayFindCommonElements.java)
 给定两个含有n个元素的有序（非降序）整型数组a和b，求出其共同元素，比如
 a = 0, 1, 2, 3, 4
 b = 1, 3, 5, 7, 9
@@ -102,7 +102,7 @@ b = 1, 3, 5, 7, 9
 解法2：可以对数组a中每一个元素在数组b中做二分搜索（binary search），这样的话只需要数组b有序即可。
 
 
-#### Problem 5: 求三个数组的共同元素
+#### [Problem 5: 求三个数组的共同元素](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem5_ArrayFindCommonElementAmongThree.java)
 给定三个含有n个元素的整型数组a,b和c，求他们最小的共同元素
 
 解法1： 如果三个数组都有序，则可以设置3个指针，根据3个指针所指的值比较来移动指针。
@@ -135,12 +135,12 @@ b = 1, 3, 5, 7, 9
 	}
 
 
-#### Problem 6: 找出数组中唯一的重复元素
+#### [Problem 6: 找出数组中唯一的重复元素](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem6_ArrayFindDuplicateElement.java)
 给定含有1001个元素的数组，其中存放了1-1000之内的整数，只有一个整数是重复的，请找出这个数
 
 解法：求出整个数组的和，再减去1-1000的和
 
-#### Problem 7: 找出出现奇数次的元素
+#### [Problem 7: 找出出现奇数次的元素](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem7_ArrayFindElementOccurOdd.java)
 给定一个含有n个元素的整型数组a，其中只有一个元素出现奇数次，找出这个元素。
 
 解法：对于任意一个数k，有`k ^ k = 0`，`k ^ 0 = k`，所以将数组a中所有元素进行异或，则个数为偶数的元素异或后都变成了0，只留下了个数为奇数的那个元素。
@@ -153,7 +153,7 @@ b = 1, 3, 5, 7, 9
         return k;
     }
 
-#### Problem 8: 求两数组中满足给定和的数对
+#### [Problem 8: 求两数组中满足给定和的数对](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem8_ArrayFindFixedSumInTwoArrays.java)
 给定两个有序整型数组a和b，各有n个元素，求两个数组中满足给定和的数对，即对a中元素i和b中元素j，满足i + j = s(s已知)
 
 解法：利用数组有序特性，设置2个指针i，j分别指向数组a，b的头部。然后从两端向中间遍历，直到交叉。
@@ -172,7 +172,7 @@ b = 1, 3, 5, 7, 9
         }
     }
 
-#### Problem 9: 求数组中是否存在3元素之和满足给定数
+#### [Problem 9: 求数组中是否存在3元素之和满足给定数](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem9_ArrayFindFixedSumByThreeElements.java)
 给定一无序整型数组a，求数组a中是否有任意3个元素之和等于给定数s
 
 解法：对数组排序，然后设置3个指针i，j，k。i指向头部，j指向i+1个元素，k指向尾部。遍历数组，求a[i],a[j],a[k]之和，如果等于s则输出，反之根据比较值决定i向后移动或k向前移动，直到i，k交叉。
@@ -195,7 +195,7 @@ b = 1, 3, 5, 7, 9
         }
     }
     
-#### Problem 10: 最大子段和
+#### [Problem 10: 最大子段和](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem10_ArrayFindMaxSum.java)
 给定一个整型数组a，求出最大连续子段之和，如果和为负数，则按0计算，比如`1， 2， -5， 6， 8`则输出`14`
 
     public static void find(int[] a) {
@@ -211,7 +211,7 @@ b = 1, 3, 5, 7, 9
         return max;
     }
 
-#### Problem 11: 最大子段积
+#### [Problem 11: 最大子段积](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem11_ArrayFindMaxProduct.java)
 给定一个整型数组a，求出最大连续子段的乘积，比如`1， 2， -8， 12， 7`则输出`84`
 
 解法：和最大子段和类似，注意正负符号。
@@ -239,7 +239,7 @@ b = 1, 3, 5, 7, 9
         return result;
     }
 
-#### Problem 12: 数组循环移位
+#### [Problem 12: 数组循环移位](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem12_ArrayRotate.java)
 将一个含有n个元素的数组向右循环移动k位，要求时间复杂度是O(n)，且只能使用两个额外的变量。要求时间复杂度不超过`O(n)`，空间复杂度不超过`O(1)`
 
 例如：数组`1,2,3,4,5` 循环2位后为`4,5,1,2,3`
@@ -262,7 +262,7 @@ b = 1, 3, 5, 7, 9
         reverse(a, 0, n - 1);
     }
     
-#### Problem 13: 合并两个数组
+#### [Problem 13: 合并两个数组](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem13_ArrayMergeTwoSortedArrays.java)
 给定含有n个元素的有序（非降序）整型数组a和含有m个元素的有序（非降序）整型数组b。合并两个数组中的元素到整型数组c，要求去除重复元素并保持c有序（非降序）。例子如下
 a = 1, 2, 4, 8
 b = 1, 3, 5, 8
@@ -299,7 +299,7 @@ c = 1, 2, 3, 4, 5, 8
         return Arrays.copyOfRange(c, 0, k);
     }
 
-#### Problem 14: 重排问题1 - 将0移到数组前段
+#### [Problem 14: 重排问题1 - 将0移到数组前段](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem14_ArraySortZeroFirst.java)
 给定含有n个元素的整型数组a，其中包括0元素和非0元素，对数组进行排序，要求：
 1. 排序后所有0元素在前，所有非零元素在后，且非零元素排序前后相对位置不变
 2. 不能使用额外存储空间
@@ -322,7 +322,7 @@ c = 1, 2, 3, 4, 5, 8
         return a;
     }
 
-#### Problem 15: 重排问题2 - 奇偶数分开
+#### [Problem 15: 重排问题2 - 奇偶数分开](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem15_ArraySortOddEvenSeparation.java)
 给定含有n个元素的整型数组a，将奇数都归到数组的左边，偶数归到数组的右边，不考虑元素的相对顺序。要求时间复杂度为`O(n)`
 
 解法：类似于QuickSort的partition，设置left，right两个指针分别指向数组的头尾向中间移动。
@@ -350,7 +350,7 @@ c = 1, 2, 3, 4, 5, 8
         return a;
     }
     
-#### Problem 16: 找出绝对值最小的元素
+#### [Problem 16: 找出绝对值最小的元素](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem16_ArrayMinAbs.java)
 给定一个有序整数序列（非递减序），可能包含负数，找出其中绝对值最小的元素，比如给定序列`-5, -3, -1, 2, 8` 则返回1。
 
 解法：有序数组查找首先考虑二分搜索:
@@ -392,7 +392,7 @@ c = 1, 2, 3, 4, 5, 8
 
 
 
-#### Problem 17: 找出数组中第k小的元素 ***
+#### [Problem 17: 找出数组中第k小的元素 ***](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem17_ArrayFindKSmallestElement.java)
 给定一无序整型数组a，在不排序的情况下，查找第k小的元素
 
 解法：查找元素优先考虑二分搜索，因为数组无序，所以需要对二分搜索作出修改。参考QuickSort的partition过程。首选在数组中任选一个元素做参考值，将比参考值小的元素都移动到参考值的左边，比参考值大的元素都移动到右边。判断左边数组的长度若大于k，则第k小的值一定在左边，只需要在左边部分重复在这一过程。若左边数组长度小于k，则在右边数组重复这一过程，只不过查找的是k减去左边数组的长度。
@@ -439,7 +439,7 @@ c = 1, 2, 3, 4, 5, 8
     }
 
 
-#### Problem 18: 找出两个有序数组的中位数 ***
+#### [Problem 18: 找出两个有序数组的中位数 ***](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/array/Problem18_ArrayFindMedianInTwoSortedArrays.java)
 给定两个有序整型数组A，B，查找两个数组合并后的中位数，要求时间复杂度不超过`O(log(n+m))`
 
 解法1：可以将两个数组拼凑成一个数组然后使用与上一题相同的方法解，即查找第K个元素
@@ -489,7 +489,7 @@ c = 1, 2, 3, 4, 5, 8
 
 ### 2. 字符串类
 
-#### Problem 1: 字符串反转1
+#### [Problem 1: 字符串反转1](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/string/Problem1_StringReverse.java)
 给定一个含有n个元素的字符数组a，将其原地逆序。
 
 解法：设置2个指针分别指向头尾，交换两指针所指向的字符，逐渐向中间靠拢直到指针交叉。
@@ -505,7 +505,7 @@ c = 1, 2, 3, 4, 5, 8
         return a;
     }
 
-#### Problem 2: 字符串反转2 - 反转单词出现顺序
+#### [Problem 2: 字符串反转2 - 反转单词出现顺序](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/string/Problem2_StringReverseWords.java)
 给定一个字符串，反转其中单词出现的顺序，单词本身不反转。
 例如字符串s1 = "This is a sentence" 反转后得到"sentence a is This"
 
@@ -538,7 +538,7 @@ c = 1, 2, 3, 4, 5, 8
         return s;
     }
 
-#### Problem 3: 判断字符串中字符是否唯一
+#### [Problem 3: 判断字符串中字符是否唯一](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/string/Problem3_StringUniqueElement.java)
 给定一含有n元素的字符串（假定都是ASCII字符），判断该字符串中的各个字符是否唯一。要求时间复杂度为`O(n)`
 
 解法：新建一布尔数组，遍历字符串中每个字符，判断其在布尔数组中是否重复出现。
@@ -555,7 +555,7 @@ c = 1, 2, 3, 4, 5, 8
         return true;
     }
     
-#### Problem 4: 判断两字符串是否旋转关系
+#### [Problem 4: 判断两字符串是否旋转关系](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/string/Problem4_StringRotation.java)
 给定两个字符串s1，s2.判断s2是否由s1旋转得来。例如s1 = "waterbottle", s2 = "terbottlewa"，则判断为true。若s1 = "dog", s2 = "god" 则返回false
 
 解法：将s2 加上（concat）其本身得到新字符串s3，如果s1是s3的子串（substring）则判断为true
@@ -578,7 +578,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     ｝
 
-#### Problem 1: 反转单链表
+#### [Problem 1: 反转单链表](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/linkedlist/Problem1_LinkedListReverse.java)
 给定一单链表 1->2->3->4，要求在`O(n)`时间复杂度内反转得到新的单链表 4->3->2->1
 
     public static Node reverse(Node head) {
@@ -594,7 +594,7 @@ c = 1, 2, 3, 4, 5, 8
         return pre;
     }
 
-#### Problem 2: 判断单链表是否存在环
+#### [Problem 2: 判断单链表是否存在环](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/linkedlist/Problem2_LinkedListCircleExists.java)
 
 解法：设置2个指针p1，p2均指向链表头部，p1每次向后移动一格，p2每次向后移动2格。如果p2 == p1则说明链表中存在环。
 
@@ -614,25 +614,11 @@ c = 1, 2, 3, 4, 5, 8
         return false;
     }
     
-#### Problem 3: 查找链表中离尾部距离为n的元素
+#### [Problem 3: 查找链表中离尾部距离为n的元素](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/linkedlist/Problem3_LinkedListFindElementNToRear.java)
 
 解法：设置2个指针p1，p2均指向头部。将p2向后移动n-1步，则p1和p2的距离为n。移动p2到尾部，则p1就是那个要找的元素。
 
-	public static Node nToLastNode(Node head, int n){
-		Node p1 = head;
-		Node p2 = head;
-		while (n > 0){
-			p2 = p2.next;
-			n--;
-		}
-		while(p2.next != null){
-			p2 = p2.next;
-			p1 = p1.next;
-		}
-		return p1;
-	}
-	
-#### Problem 4: 链表数值求和
+#### [Problem 4: 链表数值求和](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/linkedlist/Problem4_LinkedListAddTwoNumbers.java)
 给定2个单链表，链表中每个元素的值均是一个整型。链表表达的数字是反向存储的，即第一位数字存储在链表的头部。实现一个函数将两个链表所表达的数字相加并且以同样的链表格式返回。
 
 例如 (3->1->5), (5->9->2) 输出为 8->0->8
@@ -657,7 +643,7 @@ c = 1, 2, 3, 4, 5, 8
         return result;
     }
     
-#### Problem 5: 链表查找环的开始
+#### [Problem 5: 链表查找环的开始](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/linkedlist/Problem5_LinkedListFindBeginningInCirular.java)
 
     public static Node findBeginning(Node head) {
         Node p1 = head;
@@ -722,7 +708,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     }
     
-#### Problem 1: 递归颠倒栈內元素
+#### [Problem 1: 递归颠倒栈內元素](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/stackandqueue/Problem1_HStackReverse.java)
 给定一含有多个元素的栈，用递归颠倒栈內元素。例如栈内元素为`{1,2,3,4,5}` 1在栈顶，颠倒后成为`｛5，4，3，2，1｝` 5在栈顶。
 
     public static void reverseStack(HStack stack) {
@@ -743,7 +729,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     }
 
-#### Problem 2: 实现min函数的栈
+#### [Problem 2: 实现min函数的栈](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/stackandqueue/Problem2_HStackWithMin.java)
 定义栈的数据结构，要求添加一个min函数，能够得到栈的最小元素。要求函数min、push以及pop的时间复杂度都是O(1)。
 
 解法：在栈內另存一个栈来保存最小值。
@@ -776,7 +762,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     }
     
-#### Problem 3: 用两个栈来实现队列
+#### [Problem 3: 用两个栈来实现队列](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/stackandqueue/Problem3_HStackToQueue.java)
 
 解法：栈和队列的区别在于访问策略，栈是FILO，队列是FIFO。假设有栈s1，s2，在读取元素的时候，第一次将s1所有元素出栈并压入s2，之后只要判断s2不为空则直接从s2 pop出第一个元素，当s2为空时重复s1出栈并压入s2的过程即可实现队列。
     
@@ -803,7 +789,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     }
     
-#### Problem 4: 栈的排序
+#### [Problem 4: 栈的排序](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/stackandqueue/Problem4_HStackSort.java)
 编写程序将一给定栈的元素以升序排列，栈类上只有4个方法可用，`pop`,`push`,`peek`,`isEmpty`
 
 例如给定栈s1 = {4, 3, 1, 5, 2} 2为栈顶，排序后得到 s2 = {1, 2, 3, 4, 5} 5为栈顶
@@ -830,7 +816,7 @@ c = 1, 2, 3, 4, 5, 8
 +  若它的右子树不空，则右子树上所有结点的值均大于它的根结点的
 +  左、右子树也分别为二叉排序树
 
-#### Problem 1: 二叉查找树插入子节点
+#### [Problem 1: 二叉查找树插入子节点](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem1_TreeInsertChildNode.java)
 
     public boolean addNode(int value) {
         BinarySearchTreeNode current = this;
@@ -855,7 +841,7 @@ c = 1, 2, 3, 4, 5, 8
         return true;
     }    
 
-#### Problem 2: 如何判断树是否平衡二叉树
+#### [Problem 2: 如何判断树是否平衡二叉树](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem2_TreeBalanced.java)
 
 平衡二叉树Balanced binary tree 的定义是它是一 棵空树或它的左右两个子树的高度差的绝对值不超过1。
 
@@ -877,7 +863,7 @@ c = 1, 2, 3, 4, 5, 8
         return (getMaxDepth(root) - getMinDepth(root)) <= 1;
     }
     
-#### Problem 3: 判断两颗二叉树是否相等
+#### [Problem 3: 判断两颗二叉树是否相等](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem3_TreeTwoEquals.java)
 
 解法：递归判断很简单
 
@@ -892,7 +878,7 @@ c = 1, 2, 3, 4, 5, 8
 
 二叉树的遍历分前序 preorder，中序 inorder，后序 postorder，这三种统称深度优先遍历 Depth-first traversal，还有一种是广度优先遍历 Breadth-first traversal
 
-#### Problem 4: 前序遍历的非递归实现
+#### [Problem 4: 前序遍历的非递归实现](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem4_TreePreorderNonRecursive.java)
 
 要点在于用栈来保存左右节点
 
@@ -912,7 +898,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     }
 
-#### Problem 5: 广度优先遍历的非递归实现
+#### [Problem 5: 广度优先遍历的非递归实现](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem5_TreeBreadthFirstTraversal.java)
 
 要点在于用队列来保存左右节点
 
@@ -932,7 +918,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     }
     
-#### Problem 6: 找出二叉查找树上任意两个节点的最近共同父节点。
+#### [Problem 6: 找出二叉查找树上任意两个节点的最近共同父节点](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem6_TreeFindCommonAncestor.java)
 
 解法：因为是二叉查找树，所以很简单。最近共同父节点的值n和任意两个节点n1，n2之间一定满足关系`n1<n<n2`
 
@@ -979,7 +965,7 @@ c = 1, 2, 3, 4, 5, 8
     }
 
 
-#### Problem 7: 判断一个二叉树是否为二叉查找树
+#### [Problem 7: 判断一个二叉树是否为二叉查找树](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem7_TreeCheckBSTValid.java)
 解法：采用递归实现中序遍历
 
 	public static boolean checkBSTValid(BinarySearchTreeNode bstNode, int previousValue){
