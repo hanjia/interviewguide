@@ -966,20 +966,50 @@ c = 1, 2, 3, 4, 5, 8
 
 
 #### [Problem 7: 判断一个二叉树是否为二叉查找树](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem7_TreeCheckBSTValid.java)
-解法：采用递归实现中序遍历
 
-	public static boolean checkBSTValid(BinarySearchTreeNode bstNode, int previousValue){
-		if(bstNode == null)
-			return true;
-		
-		if(checkBSTValid(bstNode.left, previousValue)){
-			if (bstNode.value > previousValue) {
-				previousValue = bstNode.value;
-			    return checkBSTValid(bstNode.right, previousValue);
-			} else {
-				return false;
-			}
-		}else {
-		    return false;
-		}
-	}
+递归实现:
+    
+    public static boolean isValidBST(BinarySearchTreeNode root) {
+        return isValidBST(root, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);    
+    }
+     
+    public static boolean isValidBST(BinarySearchTreeNode p, double min, double max){
+        if(p==null) 
+            return true;
+     
+        if(p.value <= min || p.value >= max)
+            return false;
+     
+        return isValidBST(p.left, min, p.value) && isValidBST(p.right, p.value, max);
+    }
+    
+中序遍历实现:
+
+    public static boolean isValidBSTIterative(BinarySearchTreeNode root) { //In order traversal
+        if (root == null) {
+        	return true;
+        }
+        
+        Stack<BinarySearchTreeNode> s = new Stack<BinarySearchTreeNode>();
+        BinarySearchTreeNode current = root;        
+        BinarySearchTreeNode pre = null;
+        
+        while(true) {
+            while (current != null) {
+                s.push(current);
+                current = current.left;
+            }          
+            if (s.isEmpty()) {
+                break;
+            }
+            
+            current = s.pop();            
+            if(pre != null && pre.value >= current.value) { // check the numbers are increasing
+                return false;
+            }            
+            pre = current;
+            current = current.right;
+        }
+        
+        return true;
+    }
