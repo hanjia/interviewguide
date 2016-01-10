@@ -2,7 +2,7 @@ package interviewguide.tree;
 
 import java.util.ArrayDeque;
 
-public class Problem5_TreeBreadthFirstTraversal {
+public class Problem6_TreeBreadthFirstTraversal {
 	
 	/*
 	 * 要点: 在于用队列来保存左右节点

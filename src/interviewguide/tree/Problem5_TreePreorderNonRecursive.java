@@ -2,7 +2,7 @@ package interviewguide.tree;
 
 import java.util.Stack;
 
-public class Problem4_TreePreorderNonRecursive {
+public class Problem5_TreePreorderNonRecursive {
 	
 	/*
 	 * 要点: 在于用栈来保存左右节点

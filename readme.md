@@ -867,18 +867,39 @@ c = 1, 2, 3, 4, 5, 8
 
 解法：递归判断很简单
 
-    public static boolean isTreeEquals(BinarySearchTreeNode t1, BinarySearchTreeNode t2) {
+    public static boolean areTwoTreesEqual(BinarySearchTreeNode t1, BinarySearchTreeNode t2) {
         if (t1 == t2) {
             return true;
         }
-        return (t1.value == t2.value) && isTreeEquals(t1.left, t2.left) && isTreeEquals(t1.right, t2.right);
+        return (t1.value == t2.value) && areTwoTreesEqual(t1.left, t2.left) && areTwoTreesEqual(t1.right, t2.right);
     }
+    
+    
+#### [Problem 4: 判断两颗二叉树是否有一棵是另一棵的子树](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem4_TreeTwoSubtree.java)
+
+解法：递归判断很简单
+
+   public boolean isSubtree(BinarySearchTreeNode main, BinarySearchTreeNode subtree) {
+       if (subtree == null) {
+           return true;
+       }
+
+       if (main == null) {
+           return false;
+       }
+
+       if (areTwoTreesEqual(main, subtree)) {
+           return true;
+       }
+
+       return isSubtree(main.left, subtree) || isSubtree(main.right, subtree);
+   }
     
 #### 二叉树的遍历
 
 二叉树的遍历分前序 preorder，中序 inorder，后序 postorder，这三种统称深度优先遍历 Depth-first traversal，还有一种是广度优先遍历 Breadth-first traversal
 
-#### [Problem 4: 前序遍历的非递归实现](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem4_TreePreorderNonRecursive.java)
+#### [Problem 4: 前序遍历的非递归实现](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem5_TreePreorderNonRecursive.java)
 
 要点在于用栈来保存左右节点
 
@@ -898,7 +919,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     }
 
-#### [Problem 5: 广度优先遍历的非递归实现](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem5_TreeBreadthFirstTraversal.java)
+#### [Problem 5: 广度优先遍历的非递归实现](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem6_TreeBreadthFirstTraversal.java)
 
 要点在于用队列来保存左右节点
 
@@ -918,7 +939,7 @@ c = 1, 2, 3, 4, 5, 8
         }
     }
     
-#### [Problem 6: 找出二叉查找树上任意两个节点的最近共同父节点](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem6_TreeFindCommonAncestor.java)
+#### [Problem 6: 找出二叉查找树上任意两个节点的最近共同父节点](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem7_TreeFindCommonAncestor.java)
 
 解法：因为是二叉查找树，所以很简单。最近共同父节点的值n和任意两个节点n1，n2之间一定满足关系`n1<n<n2`
 
@@ -965,7 +986,7 @@ c = 1, 2, 3, 4, 5, 8
     }
 
 
-#### [Problem 7: 判断一个二叉树是否为二叉查找树](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem7_TreeCheckBSTValid.java)
+#### [Problem 7: 判断一个二叉树是否为二叉查找树](https://github.com/hanjia/interviewguide/blob/master/src/interviewguide/tree/Problem8_TreeCheckBSTValid.java)
 
 递归实现:
     

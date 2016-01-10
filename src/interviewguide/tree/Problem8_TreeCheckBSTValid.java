@@ -7,7 +7,7 @@ import java.util.Stack;
  * @author hanjia
  *
  */
-public class Problem7_TreeCheckBSTValid {
+public class Problem8_TreeCheckBSTValid {
 
     public static boolean isValidBST(BinarySearchTreeNode root) {
         return isValidBST(root, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);    

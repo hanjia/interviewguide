@@ -1,6 +1,6 @@
 package interviewguide.tree;
 
-public class Problem6_TreeFindCommonAncestor {
+public class Problem7_TreeFindCommonAncestor {
 	
 	/*
 	 * 解法：因为是二叉查找树，所以很简单。最近共同父节点的值n和任意两个节点n1，n2之间一定满足关系`n1<n<n2`
