@@ -1,12 +1,11 @@
 package interviewguide.tree;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class LongestWordByPeriodicTableElements {
 
-	static List<String> symbolList = new ArrayList<String>();
+	static List<String> symbolList;
 	
 	public boolean checkSymbol(String word, int index){
 		if(index >= word.length()) {
@@ -19,12 +18,23 @@ public class LongestWordByPeriodicTableElements {
 		return valid;
 	}
 	
+	//Assume the dictionary is a sorted array of words based on word length
+	public String findLongestWordInDict(String[] dict){
+		String longestWord = "";
+		for (String word: dict) {
+			if ((word.length() > longestWord.length()) && checkSymbol(word, 0))
+				longestWord = word;
+		}
+		return longestWord;
+	}
+	
 	public static void main(String[] args) {
 		String[] symbolArray = {"a","ab","bc","d"};
-		symbolList = Arrays.asList(symbolArray);
-		String word = "abcd";
+		LongestWordByPeriodicTableElements.symbolList = Arrays.asList(symbolArray);
+		String[] words = {"aasbwebwesdbwew", "abwefscd", "abcadbc", "abc"};
+		
 		LongestWordByPeriodicTableElements longestWord = new LongestWordByPeriodicTableElements();
-		System.out.println(longestWord.checkSymbol(word, 0));		
+		System.out.println(longestWord.findLongestWordInDict(words));		
 	}
 
 }
