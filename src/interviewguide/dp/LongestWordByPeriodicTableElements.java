@@ -1,4 +1,4 @@
-package interviewguide.tree;
+package interviewguide.dp;
 
 import java.util.Arrays;
 import java.util.List;
